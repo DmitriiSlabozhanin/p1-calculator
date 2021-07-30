@@ -1,9 +1,16 @@
-let money;
-let income;
-let addExpenses;
-let deposit;
-let mission;
-let period;
-
-alert("hello");
-console.log(1);
+let money = 55000;
+console.log(typeof money);
+let income = "25000";
+console.log(typeof income);
+let addExpenses = "Тренажерка, Бензикс, Сотовая связь";
+console.log(addExpenses.length);
+console.log(addExpenses.toLowerCase());
+console.log("тренажерка,бензикс,сотовая связь".split(","));
+let deposit = false;
+console.log(typeof deposit);
+let mission = 300000;
+console.log("Цель заработать " + mission + " рублей");
+let period = 8;
+console.log("Период равен " + period + " месяцев");
+let budgetDay = money / 30;
+console.log(budgetDay);
