@@ -1,12 +1,26 @@
 'use strict';
 
-let money = 60000;
+let isNumber = function(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+};
+
+let money;
 let income = "25000";
 let addExpenses = "Тренажерка, Бензикс, Сотовая связь";
 let deposit = false;
 let mission = 300000;
 let period = 8;
-let budgetDay = money / 30;
+
+
+let start = function() {
+    
+    do {
+        money = prompt('Ваш месячный доход?');
+    }
+    while (!isNumber(money));
+    };
+
+start();
 
 let showTypeOf = function(data) {
     console.log(data, typeof(data));
@@ -16,6 +30,8 @@ showTypeOf(money);
 showTypeOf(income);
 showTypeOf(deposit);
 
+let budgetDay = money / 30;
+
 console.log(addExpenses.length);
 console.log(addExpenses.toLowerCase());
 console.log("тренажерка,бензикс,сотовая связь".split(","));
@@ -23,21 +39,21 @@ console.log("Цель заработать " + mission + " рублей");
 console.log("Период равен " + period + " месяцев");
 console.log(budgetDay);
 
-let question = prompt("Ваш месячный доход?");
+/*let question = prompt("Ваш месячный доход?");
 money = parseInt(question);
 console.log(typeof money);
-console.log(money);
+console.log(money);*/
 
 addExpenses = prompt("Перечислите возможные расходы за рассчитываемый период через запятую");
 console.log(typeof addExpenses);
 console.log(addExpenses);
 
-let question5 = confirm("Есть ли у вас депозит в банке?");
-deposit = question5;
-console.log(typeof deposit);
+deposit = confirm("Есть ли у вас депозит в банке?");
 console.log(deposit);
 
-let expenses1 = prompt("Введите обязательную статью расходов?");
+
+
+/*let expenses1 = prompt("Введите обязательную статью расходов?");
 console.log(expenses1);
 
 let expenses2 = prompt("Введите обязательную статью расходов?");
@@ -51,7 +67,7 @@ console.log(amount1);
 let question4 = prompt("Во сколько это обойдется?");
 let amount2 = parseInt(question4);
 console.log(typeof amount2);
-console.log(amount2);
+console.log(amount2);*/
 
 //let budgetMonth = money - (amount1 + amount2);
 //console.log(typeof budgetMonth);
@@ -63,15 +79,33 @@ console.log(amount2);
 //budgetDay = Math.floor(budgetMonth/30);
 //console.log("Бюджет на день: " + budgetDay);
 
-let getExpensesMonth = function() {
-    return amount1 + amount2;
-};
+let expenses1, expenses2;
 
-let resultExp = getExpensesMonth();
-console.log("Общие затраты: ", resultExp);
+let getExpensesMonth = function() {
+    let sum = 0;
+
+    for(let i = 0; i < 2; i++) {
+
+        if (i === 0) {
+            expenses1 = prompt("Введите обязательную статью расходов?"); 
+        } else if (i === 1) {
+            expenses2 = prompt("Введите обязательную статью расходов?");
+        }
+
+        sum += +prompt ("Во сколько это обойдется?");
+    }
+    console.log(sum);
+    return sum;
+};
+if (typeof sum !== 'number') {
+    alert('Переданное значение не является числом!');
+}
+
+let expensesAmount = getExpensesMonth();
+console.log("Общие затраты: ", expensesAmount);
 
 let getAccumulatedMonth = function() {
-    return money - resultExp;
+    return money - expensesAmount;
 };
 
 let accumulatedMonth = getAccumulatedMonth();
@@ -82,7 +116,12 @@ let getTargetMonth = function() {
 };
 
 let resultTarget = getTargetMonth();
-console.log("За " + resultTarget + " месяцев будет достигнута цель");
+if (resultTarget > 0) {
+    console.log("За " + resultTarget + " месяцев будет достигнута цель");
+} else if (resultTarget < 0) {
+    console.log("Цель не будет достигнута");
+}
+
 
 budgetDay = Math.floor(accumulatedMonth/30);
 console.log("Бюджет на день: " + budgetDay);
