@@ -93,13 +93,15 @@ let getExpensesMonth = function() {
         }
 
         sum += +prompt ("Во сколько это обойдется?");
+
+        if ((typeof (sum)) !== 'number') {
+            alert ("Переданное значение не является числом!")
+        }
+
     }
     console.log(sum);
     return sum;
 };
-if (typeof sum !== 'number') {
-    alert('Переданное значение не является числом!');
-}
 
 let expensesAmount = getExpensesMonth();
 console.log("Общие затраты: ", expensesAmount);
