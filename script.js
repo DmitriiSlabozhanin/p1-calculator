@@ -39,11 +39,6 @@ console.log("Цель заработать " + mission + " рублей");
 console.log("Период равен " + period + " месяцев");
 console.log(budgetDay);
 
-/*let question = prompt("Ваш месячный доход?");
-money = parseInt(question);
-console.log(typeof money);
-console.log(money);*/
-
 addExpenses = prompt("Перечислите возможные расходы за рассчитываемый период через запятую");
 console.log(typeof addExpenses);
 console.log(addExpenses);
@@ -51,56 +46,33 @@ console.log(addExpenses);
 deposit = confirm("Есть ли у вас депозит в банке?");
 console.log(deposit);
 
-
-
-/*let expenses1 = prompt("Введите обязательную статью расходов?");
-console.log(expenses1);
-
-let expenses2 = prompt("Введите обязательную статью расходов?");
-console.log(expenses2);
-
-let question3 = prompt("Во сколько это обойдется?");
-let amount1 = parseInt(question3);
-console.log(typeof amount1);
-console.log(amount1);
-
-let question4 = prompt("Во сколько это обойдется?");
-let amount2 = parseInt(question4);
-console.log(typeof amount2);
-console.log(amount2);*/
-
-//let budgetMonth = money - (amount1 + amount2);
-//console.log(typeof budgetMonth);
-//console.log("Бюджет на месяц: " + budgetMonth);
-
-//let howMuchMonth = Math.ceil(mission / budgetMonth);
-//console.log("Цель будет достигнута за " + howMuchMonth + " месяцев");
-
-//budgetDay = Math.floor(budgetMonth/30);
-//console.log("Бюджет на день: " + budgetDay);
-
 let expenses1, expenses2;
+let sum;
+let value = 0;
 
 let getExpensesMonth = function() {
-    let sum = 0;
 
-    for(let i = 0; i < 2; i++) {
+    for (let i = 0; i < 2; i++) {
 
         if (i === 0) {
             expenses1 = prompt("Введите обязательную статью расходов?"); 
         } else if (i === 1) {
             expenses2 = prompt("Введите обязательную статью расходов?");
         }
-
-        sum += +prompt ("Во сколько это обойдется?");
-
-        if ((typeof (sum)) !== 'number') {
-            alert ("Переданное значение не является числом!")
+            sum = prompt('Во сколько это обойдется?');
+    
+        while (!isNumber(sum)) {
+            sum = prompt('Во сколько это обойдется?');
         }
+        value = sum*1 + value*1;
 
-    }
-    console.log(sum);
-    return sum;
+        if ((typeof (value)) !== 'number') {
+            alert ("Переданное значение не является числом!");
+        }
+        
+        console.log(value);
+        }
+        return value;
 };
 
 let expensesAmount = getExpensesMonth();
