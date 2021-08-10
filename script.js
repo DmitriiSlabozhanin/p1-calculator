@@ -1,6 +1,6 @@
 'use strict';
 
-/*let isNumber = function(n) {
+let isNumber = function(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 };
 
@@ -112,26 +112,4 @@ if (budgetDay >= 1200) {
 }
 };
 
-console.log(getStatusIncome());*/
-
-function func (hours, minutes) {
-    if (hours < 0 || hours > 23 || minutes < 0 || minutes > 59) {
-      alert ("Заданы неверно часы или минуты");
-      return null;
-      }
-      let hAngle = 2 * Math.PI * (hours % 12) / 12;
-      let hMin = 2 * Math.PI * minutes / 60;
-      hAngle = hAngle + (hMin/12);
-      let angle = hAngle - hMin;
-      if (angle < 0) {
-          angle += 2 * Math.PI;
-          } else if (angle > 2 * Math.PI) {
-          angle -= 2 * Math.PI;
-          }
-      angle = angle * 180 / Math.PI;
-      console.log(angle);
-      return angle;
-    }
-    
-    func(1.5, 0);
-    
+console.log(getStatusIncome());
