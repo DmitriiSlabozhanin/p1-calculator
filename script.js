@@ -1,5 +1,68 @@
 'use strict';
 
+let buttonStart = document.getElementById('start');
+console.log(buttonStart);
+
+let buttonIncome = document.getElementsByTagName('button')[0];
+console.log(buttonIncome);
+
+let buttonExpenses = document.getElementsByTagName('button')[1];
+console.log(buttonExpenses);
+
+let checkDeposit = document.querySelector('#deposit-check');
+console.log(checkDeposit);
+
+let additionIncome = document.querySelectorAll('.additional_income-item');
+console.log(additionIncome);
+     
+let budgetDayValue = document.getElementsByClassName('budget_day-value')[0];
+console.log(budgetDayValue);
+
+let expensesMonthValue = document.getElementsByClassName('expenses_month-value')[0];
+console.log(expensesMonthValue);
+
+let additionalIncomeValue = document.getElementsByClassName('additional_income-value')[0];
+console.log(additionalIncomeValue);
+
+let additionalExpensesValue = document.getElementsByClassName('additional_expenses-value')[0];
+console.log(additionalExpensesValue);
+
+let incomePeriodValue = document.getElementsByClassName('income_period-value')[0];
+console.log(incomePeriodValue);
+
+let targetMonthValue = document.getElementsByClassName('target_month-value')[0];
+console.log(targetMonthValue);
+
+let salaryAmount = document.querySelector('.salary-amount');
+console.log(salaryAmount);
+
+let incomeAmount = document.querySelector('.income-amount');
+console.log(incomeAmount);
+
+let incomeTitle = document.querySelector('[class="income-title"]');
+console.log(incomeTitle);
+
+let expensesTitle = document.querySelector('[class="expenses-title"]');
+console.log(expensesTitle);
+
+let expensesAmount = document.querySelector('.expenses-amount');
+console.log(expensesAmount);
+
+let additionalExpensesItem = document.querySelector('.additional_expenses-item');
+console.log(additionalExpensesItem);
+
+let depositAmount = document.querySelector('.deposit-amount');
+console.log(depositAmount);
+
+let depositPercent = document.querySelector('.deposit-percent');
+console.log(depositPercent);
+
+let targetAmount = document.querySelector('.target-amount');
+console.log(targetAmount);
+
+let periodSelect = document.querySelector('.period-select');
+console.log(periodSelect);
+
 let isNumber = function(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 };
@@ -149,19 +212,4 @@ for (let key in appData) {
     console.log (key + ":" + appData[key]);
 }
 
-const buttonStart = document.getElementById('start');
-
-console.log(buttonStart);
-
-const buttonIncome = document.getElementsByTagName('button')[0];
-
-console.log(buttonIncome);
-
-const buttonExpenses = document.getElementsByTagName('button')[1];
-
-console.log(buttonExpenses);
-
-const checkDeposit = document.querySelector('#deposit-check');
-
-console.log(checkDeposit);
 
