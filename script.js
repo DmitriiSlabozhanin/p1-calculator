@@ -148,3 +148,20 @@ console.log ("Наша программа включает в себя след�
 for (let key in appData) {
     console.log (key + ":" + appData[key]);
 }
+
+const buttonStart = document.getElementById('start');
+
+console.log(buttonStart);
+
+const buttonIncome = document.getElementsByTagName('button')[0];
+
+console.log(buttonIncome);
+
+const buttonExpenses = document.getElementsByTagName('button')[1];
+
+console.log(buttonExpenses);
+
+const checkDeposit = document.querySelector('#deposit-check');
+
+console.log(checkDeposit);
+
