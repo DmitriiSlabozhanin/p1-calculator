@@ -12,8 +12,11 @@ console.log(buttonExpenses);
 let checkDeposit = document.querySelector('#deposit-check');
 console.log(checkDeposit);
 
-let additionIncome = document.querySelectorAll('.additional_income-item');
-console.log(additionIncome);
+let firstAdditionIncome = document.querySelectorAll('.additional_income-item') [0];
+console.log(firstAdditionIncome);
+
+let secondAdditionIncome = document.querySelectorAll('.additional_income-item') [1];
+console.log(secondAdditionIncome);
      
 let budgetDayValue = document.getElementsByClassName('budget_day-value')[0];
 console.log(budgetDayValue);
