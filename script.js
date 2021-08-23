@@ -22,11 +22,7 @@ depositPercent = document.querySelector('.deposit-percent'),
 targetAmount = document.querySelector('.target-amount'),
 periodSelect = document.querySelector('.period-select'),
 periodAmount = document.querySelector('.period-amount'),
-incomeItems = document.querySelectorAll('.income-items');
-
-periodSelect.addEventListener('input', () => {
-    periodAmount.textContent = periodSelect.value;
-});
+incomeItems = document.querySelectorAll('.income-items'); 
 
 let isNumber = function(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
@@ -49,9 +45,6 @@ let appData = {
     itemIncome: '',
     start: function() {
 
-        salaryAmount.addEventListener('input', () => start.disabled = salaryAmount.value.trim() === '');
-        start.addEventListener('click', start);
-
         appData.budget = +salaryAmount.value;
 
         appData.getExpenses();
@@ -60,6 +53,7 @@ let appData = {
         appData.getAddExpenses();
         appData.getAddIncome();
         appData.getBudget();
+        appData.calcSavedMoney();
 
         appData.showResult();
     },
@@ -71,7 +65,11 @@ let appData = {
         additionalExpensesValue.value = appData.addExpenses.join(', ');
         additionalIncomeValue.value = appData.addIncome.join(', ');
         targetMonthValue.value = Math.ceil(appData.getTargetMonth());
-        
+
+        start.addEventListener('click', () => {
+            periodAmount.textContent = periodSelect.value;
+            incomePeriodValue.value = appData.calcSavedMoney();
+        });
 
         periodSelect.addEventListener('input', () => {
             periodAmount.textContent = periodSelect.value;
@@ -186,10 +184,20 @@ let appData = {
     }
 };
 
+salaryAmount.addEventListener('input', () => start.disabled = salaryAmount.value.trim() === '');
 start.addEventListener('click', appData.start);
+
+periodSelect.addEventListener('input', () => {
+    periodAmount.textContent = periodSelect.value;
+    incomePeriodValue.value = appData.calcSavedMoney();
+});
+
+start.addEventListener('click', () => {
+    periodAmount.textContent = periodSelect.value;
+    incomePeriodValue.value = appData.calcSavedMoney();
+});
 
 expensesPlus.addEventListener('click', appData.addExpensesBlock);
 incomePlus.addEventListener('click', appData.addIncomeBlock);
-   
 
 
