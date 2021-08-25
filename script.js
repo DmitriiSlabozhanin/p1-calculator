@@ -56,8 +56,6 @@ let appData = {
 
         appData.budget = +salaryAmount.value;
 
-      
-
         appData.getExpenses();
         appData.getIncome();
         appData.getExpensesMonth();
