@@ -247,9 +247,13 @@ let appData = {
 
 const foo = appData.start.bind(appData);
 
+const foo2 = appData.reset.bind(appData);
+
 salaryAmount.addEventListener('input', () => start.disabled = salaryAmount.value.trim() === '');
 
 start.addEventListener('click', foo);
+
+cancel.addEventListener('click', foo2);
 
 periodSelect.addEventListener('input', () => {
     periodAmount.textContent = periodSelect.value;
