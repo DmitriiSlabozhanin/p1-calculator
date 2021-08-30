@@ -1,3 +1,3 @@
 # p1-calculator
 
-# lesson14 part 1
+# lesson15 part 2
