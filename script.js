@@ -27,10 +27,10 @@ periodAmount = document.querySelector('.period-amount');
 let expensesItems = document.querySelectorAll('.expenses-items'),
 incomeItems = document.querySelectorAll('.income-items');
 
-
 const isNumber = (n) => {
     return !isNaN(parseFloat(n)) && isFinite(n);
 };
+
 class AppData {
     constructor() {
         this.income = {};
