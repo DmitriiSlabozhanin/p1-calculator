@@ -257,17 +257,19 @@ class AppData {
 
     depositHandler() {
         if (depositCheck.checked) {
+            this.deposit = true;
             depositBank.style.display = 'inline-block';
             depositAmount.style.display = 'inline-block';
-            this.deposit = true;
             depositBank.addEventListener('change', this.changePercent);
 
         } else {
+            this.deposit = false;
             depositBank.style.display = 'none';
             depositAmount.style.display = 'none';
+            depositPercent.style.display = 'none';
             depositBank.value = '';
             depositAmount.value = '';
-            this.deposit = false;
+            depositPercent.value = '';
             depositBank.removeEventListener('change', this.changePercent);
         }
     }
