@@ -1,3 +1,3 @@
-# p1-calculator
+# timer
 
 # lesson17
