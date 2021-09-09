@@ -1,3 +1,5 @@
+/* eslint-disable no-loop-func */
+/* eslint-disable no-unmodified-loop-condition */
 /* eslint-disable arrow-parens */
 /* eslint-disable object-shorthand */
 /* eslint-disable indent */
@@ -63,27 +65,34 @@ window.addEventListener('DOMContentLoaded', function(){
 
         const btnMenu = document.querySelector('.menu'),
             menu = document.querySelector('menu'),
-            closeBtn = document.querySelector('.close-btn'),
-            menuItems = menu.querySelectorAll('ul>li');
+            //closeBtn = document.querySelector('.close-btn'),
+            //menuItems = menu.querySelectorAll('ul>li');
 
-        const handlerMenu = () => {
-
-            menu.classList.toggle('active-menu');
-            //if (!menu.style.transform || menu.style.transform === `translate(-100%)`) {
-            //    menu.style.transform = `translate(0)`;
-            //} else {
-            //    menu.style.transform = `translate(-100%)`;
-            //}
-        };
+            handlerMenu = () => {
+                let target = event.target;
+                if (target.closest('.menu')) {
+                    if (screen.width > 768) {
+                        menu.classList.toggle('active-menu');
+                    } else {
+                        menu.style.transform = `translate(0)`;
+                    }
+                } else if (target !== menu && target.closest('[href^="#"]')) {
+                    if (screen.width > 768) {
+                        menu.classList.toggle('active-menu');
+                    } else {
+                        menu.style.transform = `translate(-100%)`;
+                    }
+                }
+            };
 
         btnMenu.addEventListener('click', handlerMenu);
-        closeBtn.addEventListener('click', handlerMenu);
+        menu.addEventListener('click', handlerMenu);
 
         // for (let i = 0; i < menuItems.length; i++) {
         //    menuItems[i].addEventListener('click', handlerMenu);
         //}
 
-        menuItems.forEach((elem) => elem.addEventListener('click', handlerMenu));
+        //menuItems.forEach((elem) => elem.addEventListener('click', handlerMenu));
     };
 
     toggleMenu();
@@ -93,7 +102,6 @@ window.addEventListener('DOMContentLoaded', function(){
     const togglePopup = () => {
         const popup = document.querySelector('.popup'),
             popupBtn = document.querySelectorAll('.popup-btn'),
-            popupClose = document.querySelector('.popup-close'),
             popupWindow = document.querySelector('.popup-content'),
 			popupCoord = {
 				count: -450,
@@ -125,12 +133,56 @@ window.addEventListener('DOMContentLoaded', function(){
                 });
             });
 
-            popupClose.addEventListener('click', () => {
-                popup.style.display = 'none';
+            popup.addEventListener('click', (event) => {
+                let target = event.target;
+
+                if (target.classList.contains('popup-close')) {
+                    popup.style.display = 'none';
+                } else {
+                    target = target.closest('.popup-content');
+                    if (target === null) {
+                        popup.style.display = 'none';
+                    }
+                }
             });
     };
 
     togglePopup();
+
+    // Табы
+
+    const tabs = () => {
+        const tabHeader = document.querySelector('.service-header'),
+            tab = document.querySelectorAll('.service-header-tab'),
+            tabContent = document.querySelectorAll('.service-tab');
+
+            const toggleTabContent = (index) => {
+                for (let i = 0; i < tabContent.length; i++) {
+                    if (index === i) {
+                        tab[i].classList.add('active');
+                        tabContent[i].classList.remove('d-none');
+                    } else {
+                        tab[i].classList.remove('active');
+                        tabContent[i].classList.add('d-none');
+                    }
+                }
+            };
+
+            tabHeader.addEventListener('click', (event) => {
+                let target = event.target;
+                    target = target.closest('.service-header-tab');
+
+                if (target) {
+                    tab.forEach((item, i) => {
+                        if (item === target) {
+                            toggleTabContent(i);
+                        }
+                    });
+                }
+            });
+    };
+
+    tabs();
 
 });
 
