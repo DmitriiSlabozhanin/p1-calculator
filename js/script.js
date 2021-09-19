@@ -311,23 +311,30 @@ window.addEventListener('DOMContentLoaded', function(){
 	};
 
 
-
     // Ввод только цифр
 
     const inputValidation = () => {
 
-    const calcBlock = document.querySelector('.calc-block');
+    const calcItems = document.querySelectorAll('.calc-item');
     const inputFields = document.querySelectorAll('input');
 
-    const checkCalc = () => {
-        calcBlock.addEventListener('input', (event) => {
-            if (event.target.type !== 'number') {
-                event.target.value = event.target.value.replace(/\D/g, '');
-            }
-        });
-    };
+    calcItems.forEach(item => {
+        if (!item.classList.contains('calc-type')) {
+          item.addEventListener('input', event => {
+            let target = event.target;
+            event.target.value = target.value.replace(/[^\d]/g, '');
+          });
+        }
+    });
+    //const checkCalc = () => {
+    //    calcItem.addEventListener('input', (event) => {
+     //       if (event.target.type !== 'number') {
+     //           event.target.value = event.target.value.replace(/\D/g, '');
+    //        }
+     //   });
+    //};
 
-    checkCalc();
+    //checkCalc();
 
     const validateBlur = (elem) => {
 
@@ -396,11 +403,23 @@ window.addEventListener('DOMContentLoaded', function(){
             totalValue = document.getElementById('total');
 
             const countSum = () => {
+                function getSelectedText() {
+                    let calcType = document.querySelector('.calc-type');
+                    if (calcType.selectedIndex === -1) {
+                        return calcType.options.text;
+                    }
+                    return calcType.options[calcType.selectedIndex].value;
+                }
+                let typeValue = getSelectedText('.calc-type');
+
+                //let typeValue = calcType.options[calcType.selectedIndex].value;
+                let squareValue = +calcSquare.value;
+
                 let total = 0,
-                countValue = 1,
-                dayValue = 1;
-                const typeValue = calcType.options[calcType.selectedIndex].value,
-                    squareValue = +calcSquare.value;
+                    countValue = 1,
+                    dayValue = 1;
+
+                    console.log(typeValue);
 
                     if (calcCount.value > 1) {
                         countValue += (calcCount.value - 1) / 10;
@@ -412,9 +431,8 @@ window.addEventListener('DOMContentLoaded', function(){
                         dayValue *= 1.5;
                     }
 
-
                     if (typeValue && squareValue) {
-                        total = price * typeValue * squareValue * countValue * dayValue;
+                        total = parseInt(price * typeValue * squareValue * countValue * dayValue * 100) / 100;
                     }
                 totalValue.textContent = total;
             };
