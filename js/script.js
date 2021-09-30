@@ -435,6 +435,7 @@ window.addEventListener('DOMContentLoaded', function(){
                         total = parseInt(price * typeValue * squareValue * countValue * dayValue * 100) / 100;
                     }
                 totalValue.textContent = total;
+                
             };
 
             calcBlock.addEventListener('change', (event) => {
