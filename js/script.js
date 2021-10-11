@@ -524,12 +524,14 @@ const sendForm = () => {
             formData.forEach((val, key) => {
                 body[key] = val;
             });
-
+             
             statusMessage.textContent = loadMessage;
-
+                
             postData(body)
                 .then(() => {
+                setTimeout (() => {
                     statusMessage.textContent = successMessage;
+                }, 2000);
                     clearInput(idForm);
                 })
                 .catch(error => {
