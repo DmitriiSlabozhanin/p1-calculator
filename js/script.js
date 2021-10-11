@@ -460,27 +460,29 @@ window.addEventListener('DOMContentLoaded', function(){
     // send-ajax-form
 
 const sendForm = () => {
-    //const errorMessage = 'Что-то пошло не так...',
-    //loadMessage = 'Загрузка...',
-    //successMessage = 'Спасибо, мы скоро с вами свяжемся';
+    const errorMessage = 'Что-то пошло не так...',
+    loadMessage = 'Загрузка...',
+    successMessage = 'Спасибо, мы скоро с вами свяжемся';
     
-    const postData = body => new Promise((resolve, reject) => {
-        const request = new XMLHttpRequest();
+    const postData = (body) => {
+        return new Promise((resolve, reject) => {
+            const request = new XMLHttpRequest();
 
-        request.addEventListener('readystatechange', () => {
-            if (request.readyState !== 4) {
-                return;
-            }
-            if (request.status === 200) {
-                resolve();
-            } else {
-                reject(request.status);
-            }
+            request.addEventListener('readystatechange', () => {
+                if (request.readyState !== 4) {
+                    return;
+                }
+                if (request.status === 200) {
+                    resolve();
+                } else {
+                    reject(request.statusText);
+                }
+            });
+            request.open('GET', './server.php');
+            request.setRequestHeader('Content-Type', 'application/json');
+            request.send(JSON.stringify(body));
         });
-        request.open('POST', './server.php');
-        request.setRequestHeader('Content-Type', 'application/json');
-        request.send(JSON.stringify(body));
-    });
+    }
 
     const clearInput = (idForm) => {
             const form = document.getElementById(idForm);
@@ -509,42 +511,48 @@ const sendForm = () => {
         const form = document.getElementById(idForm);
         const statusMessage = document.createElement('div');
 
-        const statusNow = status => {
-            const statusList = {
-                load: {
-                    message: ' Загрузка...',
-                },
-                error: {
-                    message: ' Что-то пошло не так...',
-                },
-                success: {
-                    message: ' Спасибо! Мы скоро с вами свяжемся!',
-                }
-            };
-            statusMessage.textContent = statusList[status].message;
-        };
+        //const statusNow = (status) => {
+         //   const statusList = {
+         //       load: {
+          //          message: ' Загрузка...',
+          //      },
+         //       error: {
+          //          message: ' Что-то пошло не так...',
+          //      },
+          //      success: {
+         //           message: ' Спасибо! Мы скоро с вами свяжемся!',
+          //      }
+          //  };
+         //   statusMessage.textContent = statusList[status].message;
+       // };
 
         statusMessage.style.cssText = 'font-size: 2rem;';
 
         form.addEventListener('submit', event => {
+
+            event.preventDefault();
+            form.appendChild(statusMessage);
+
             const formData = new FormData(form);
             let body = {};
 
-            //statusMessage.textContent = loadMessage;
+            formData.forEach((val, key) => {
+                body[key] = val;
+            });
 
-            event.preventDefault();
+            statusMessage.textContent = loadMessage;
 
-            statusNow('load');
+            
 
-            form.appendChild(statusMessage);
+            //statusNow('load');
+
+            
 
             //for (let val  of formData.entries()){
             //    body[val[0]] = val[1];
             //}
 
-            formData.forEach((val, key) => {
-                body[key] = val;
-            });
+            
 
             //postData(body, () => {
             //    statusMessage.textContent = successMessage;
@@ -555,11 +563,11 @@ const sendForm = () => {
             //}); 
             postData(body)
                 .then(() => {
-                    statusNow('success');
+                    statusMessage.textContent = successMessage;
                     clearInput(idForm);
                 })
                 .catch(error => {
-                    statusNow('error');
+                    statusMessage.textContent = errorMessage;
                     console.error(error);
                 });
         });
@@ -567,9 +575,9 @@ const sendForm = () => {
     form.addEventListener('input', isValid); 
     };
 
-takeForm('form1');
-takeForm('form2');
-takeForm('form3');
+    takeForm('form1');
+    takeForm('form2');
+    takeForm('form3');
 };
 
 sendForm();
