@@ -42,13 +42,15 @@ const inputValidation = () => {
         elem.addEventListener('input', (event) => {
             const target = event.target;
             let value = target.value;
-            if (elem.name === 'user_name' || elem.name === 'user_message') {
+            if (elem.name === 'user_name') {
+                target.value = target.value.replace(/[^а-яё\s-]/ig, '');
+            } else if (elem.name === 'user_message') {
                 target.value = target.value.replace(/[^а-яё\s-]/ig, '');
             } else if (elem.name === 'user_email') {
                 const regexpEmail = /([^a-z@_\-.!~*'])|((?<=^)@+)|((?<=@.*)@+)/ig;
                 target.value = value.replace(regexpEmail, '');
             } else if (elem.name === 'user_phone') {
-                const regexpTelNumber = /([^\d()\-+])|((?<=.{35,}).)|((?<!^)\++)|((?<=^)-)|((?<=[+-])-+)|((?<=\([\d\-)(]*)\(+)|((?<=\()\)+)|((?<=\)[\d\-)(]*)\)+)|((?<=-)-+)/ig;
+                const regexpTelNumber = /([^\d\+])|((?<=.{9,}).)|((?<!^)\++)/gi;
                 target.value = value.replace(regexpTelNumber, '');
             }
         });
