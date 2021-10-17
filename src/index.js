@@ -7,6 +7,7 @@
     import slider from './modules/slider';
     import dots from './modules/dots';
     import setImg from './modules/setImg';
+    import inputValidation from './modules/inputValidation';
     import calc from './modules/calc';
     import sendForm from './modules/sendForm';
 
@@ -30,6 +31,9 @@
 
     // Наводка на фотки
     setImg();
+
+    // Ввод только цифр
+    inputValidation();
 
     // калькулятор
     calc();
